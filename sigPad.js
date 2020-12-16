@@ -1,7 +1,14 @@
-var canvas = document.getElementById('signature-pad');
+/**
+ * SignaturePad npm - https://github.com/szimek/signature_pad
+ */
+
+const canvas = document.getElementById('signature-pad');
 const resultImg = document.querySelector("#result")
 const savePngBtn = document.getElementById('save-png')
 const saveJpgBtn = document.getElementById('save-jpeg')
+const saveSVGBtn = document.getElementById('save-svg')
+const drawBtn = document.getElementById('draw')
+const clearBtn = document.getElementById('erase')
 // Adjust canvas coordinate space taking into account pixel ratio,
 // to make it look crisp on mobile devices.
 // This also causes canvas to be cleared.
@@ -36,7 +43,6 @@ savePngBtn.addEventListener('click', function () {
   console.log(`===============PNG==================`)
   console.log(data);
   displayImg(data)
-  // window.open(data);
 });
 
 saveJpgBtn.addEventListener('click', function () {
@@ -47,11 +53,10 @@ saveJpgBtn.addEventListener('click', function () {
   var data = signaturePad.toDataURL('image/jpeg');
   console.log(`===============JPEG==================`)
   console.log(data);
-  // window.open(data);
   displayImg(data)
 });
 
-document.getElementById('save-svg').addEventListener('click', function () {
+saveSVGBtn.addEventListener('click', function () {
   if (signaturePad.isEmpty()) {
     return alert("Please provide a signature first.");
   }
@@ -60,22 +65,28 @@ document.getElementById('save-svg').addEventListener('click', function () {
 
   console.log(`===============SVG==================`)
   console.log(data);
+  /**
+   * atob - https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/atob
+   * decode base64 strings
+   */
   console.log(atob(data.split(',')[1]));
   displayImg(data)
-  // window.open(data);
 });
 
 document.getElementById('clear').addEventListener('click', function () {
   signaturePad.clear();
 });
 
-document.getElementById('draw').addEventListener('click', function () {
+
+/**
+ * ctx.globalCompositeOperation - https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D/globalCompositeOperation
+ */
+drawBtn.addEventListener('click', function () {
   var ctx = canvas.getContext('2d');
-  console.log(ctx.globalCompositeOperation);
   ctx.globalCompositeOperation = 'source-over'; // default value
 });
 
-document.getElementById('erase').addEventListener('click', function () {
+clearBtn.addEventListener('click', function () {
   var ctx = canvas.getContext('2d');
   ctx.globalCompositeOperation = 'destination-out';
 });
