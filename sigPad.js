@@ -13,6 +13,7 @@ const clearBtn = document.getElementById('erase')
 // to make it look crisp on mobile devices.
 // This also causes canvas to be cleared.
 function resizeCanvas() {
+  console.log("resizing")
   // When zoomed out to less than 100%, for some very strange reason,
   // some browsers report devicePixelRatio as less than 1
   // and only part of the canvas is cleared then.
