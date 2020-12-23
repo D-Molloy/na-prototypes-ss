@@ -1,13 +1,15 @@
 import './App.css';
 import Snapshot from './components/Snapshot/SnapshotWidget';
+import Signature from './components/Signature/SignatureWidget';
 
 
 
 function App() {
   return (
-    <div className="App">
+    <main className="App">
       <Snapshot />
-    </div>
+      <Signature />
+    </main>
   );
 }
 
