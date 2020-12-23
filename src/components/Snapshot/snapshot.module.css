@@ -1,0 +1,9 @@
+.img,
+video,
+.button {
+  display: block;
+}
+
+.img{
+  max-width: 200px;
+}

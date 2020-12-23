@@ -15,4 +15,3 @@
 - https://stackoverflow.com/questions/53483975/navigator-mediadevices-getusermedia-not-working-on-ios-12-safari
 - https://rohitrox.github.io/2013/07/19/canvas-images-and-rails
 
-- https://dev.to/straleb/create-a-screenshot-app-with-screenshot-api-and-react-js-51fm

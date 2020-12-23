@@ -26,7 +26,7 @@ export default function SignatureWidget() {
       <hr />
       <h3>Result</h3>
       <div style={{ backgroundColor: "lightgrey" }}>
-        {src && <img src={src} alt="signature output" />}
+        {src && <img src={src} className={styles.sig_img} alt="signature output" />}
 
       </div>
     </div>
