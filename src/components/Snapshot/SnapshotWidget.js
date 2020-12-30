@@ -5,6 +5,8 @@ import Webcam from "react-webcam";
 import styles from './snapshot.module.css'
 
 
+// https://www.digitalocean.com/community/tutorials/front-and-rear-camera-access-with-javascripts-getusermedia
+
 export default function Snapshot(props) {
   const webcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
@@ -12,16 +14,27 @@ export default function Snapshot(props) {
   const capture = useCallback(() => {
     const imageSrc = webcamRef.current.getScreenshot();
     setImgSrc(imageSrc);
-  }, [webcamRef, setImgSrc]);
+  }, [webcamRef, setImgSrc])
+
+
+  // need to useRef=> https://reactjs.org/docs/uncontrolled-components.html#the-file-input-tag
+  const handleImg = e => {
+
+  };
 
   return (
     <div className="widget_container">
+      <h1>Snapshot Widget</h1>
       <Webcam
         audio={false}
         ref={webcamRef}
         screenshotFormat="image/jpeg"
       />
       <button className={styles.button} onClick={capture}>Capture photo</button>
+      {/* image file selector - opens camera on mobile */}
+      <input type="file" accept="image/*" capture="camera" />
+      {/* on mobile - prompts user to take a photo or select from album */}
+      <input type="file" accept="image/png;capture=camera" onChange={handleImg} />
       <hr />
       <h3>Result</h3>
       {imgSrc && (
