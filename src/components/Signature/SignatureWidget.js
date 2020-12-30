@@ -21,6 +21,7 @@ export default function SignatureWidget() {
     <div className="widget_container">
       <h1>Signature Widget</h1>
       <SignaturePad ref={sigCanvas} canvasProps={{ className: styles.sig_canvas }} />
+      <br />
       <button onClick={close}>Clear</button>
       <button onClick={save}>Save</button>
       <hr />

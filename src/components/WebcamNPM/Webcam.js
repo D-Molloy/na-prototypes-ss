@@ -2,12 +2,12 @@ import { useRef, useCallback, useState } from 'react'
 // https://www.npmjs.com/package/react-webcam
 // https://medium.com/@razibul.ahmed/a-quick-and-dirty-primer-on-using-react-webcam-d3e65faa1a3
 import Webcam from "react-webcam";
-import styles from './snapshot.module.css'
+import styles from './snapshotWebCam.module.css'
 
-
+// https://stackoverflow.com/questions/55655846/how-to-get-webcam-feed-with-react-hooks
 // https://www.digitalocean.com/community/tutorials/front-and-rear-camera-access-with-javascripts-getusermedia
 
-export default function Snapshot(props) {
+export default function SnapshotWebCam(props) {
   const webcamRef = useRef(null);
   const [imgSrc, setImgSrc] = useState(null);
 
@@ -31,7 +31,7 @@ export default function Snapshot(props) {
         screenshotFormat="image/jpeg"
       />
       <button className={styles.button} onClick={capture}>Capture photo</button>
-      {/* image file selector - opens camera on mobile */}
+      {/* image file selector - opens camera on mobile automatically */}
       <input type="file" accept="image/*" capture="camera" />
       {/* on mobile - prompts user to take a photo or select from album */}
       <input type="file" accept="image/png;capture=camera" onChange={handleImg} />
