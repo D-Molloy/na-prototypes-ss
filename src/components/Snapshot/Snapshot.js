@@ -1,5 +1,5 @@
 import React from 'react'
-
+// https://stackoverflow.com/questions/55655846/how-to-get-webcam-feed-with-react-hooks
 export default function Snapshot() {
   return (
     <div className="widget_container">

@@ -4,7 +4,7 @@ import { useRef, useCallback, useState } from 'react'
 import Webcam from "react-webcam";
 import styles from './snapshotWebCam.module.css'
 
-// https://stackoverflow.com/questions/55655846/how-to-get-webcam-feed-with-react-hooks
+
 // https://www.digitalocean.com/community/tutorials/front-and-rear-camera-access-with-javascripts-getusermedia
 
 export default function SnapshotWebCam(props) {
