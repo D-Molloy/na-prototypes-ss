@@ -42,7 +42,11 @@ export default function Snapshot() {
     console.log("dataUrl", dataUrl);
   };
 
-  const clearScreenshot = () => {};
+  const clearScreenshot = () => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  };
 
   const handleImgSelect = (e) => {
     if (e.target.files && e.target.files[0]) {
@@ -79,6 +83,7 @@ export default function Snapshot() {
           <button id="snap" onClick={takeScreenshot}>
             Snap Photo
           </button>
+          <button onClick={clearScreenshot}>Clear</button>
           <canvas id="canvas" ref={canvasRef} width="640" height="480"></canvas>
         </>
       )}
