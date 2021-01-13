@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 // https://stackoverflow.com/questions/55655846/how-to-get-webcam-feed-with-react-hooks
 // https://davidwalsh.name/browser-camera
 
@@ -6,6 +6,7 @@ import React, { useRef, useEffect } from "react";
 export default function Snapshot() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
+  const [imgData, setImgData] = useState("");
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
   );
@@ -38,12 +39,14 @@ export default function Snapshot() {
     const dataUrl = canvas.toDataURL("image/png");
     // base64 string
     console.log("dataUrl", dataUrl);
+    setImgData(dataUrl);
   };
 
   const clearScreenshot = () => {
     const canvas = canvasRef.current;
     const context = canvas.getContext("2d");
     context.clearRect(0, 0, canvas.width, canvas.height);
+    setImgData("");
   };
 
   const handleImgSelect = (e) => {
@@ -53,6 +56,7 @@ export default function Snapshot() {
       reader.onloadend = () => {
         // base64 string
         console.log(reader.result);
+        setImgData(reader.result);
       };
       reader.readAsDataURL(file);
     }
@@ -63,12 +67,15 @@ export default function Snapshot() {
       <h1>snapshot widget</h1>
       <h1>User is on: {isMobile ? "Mobile" : "Desktop"}</h1>
       {isMobile ? (
-        <input
-          type="file"
-          accept="image/*"
-          capture="camera"
-          onChange={(e) => handleImgSelect(e)}
-        />
+        <>
+          <input
+            type="file"
+            accept="image/*"
+            capture="camera"
+            onChange={(e) => handleImgSelect(e)}
+          />
+          {imgData && <img src={imgData} alt="User Profile" width="320" />}
+        </>
       ) : (
         <>
           <video
@@ -81,7 +88,8 @@ export default function Snapshot() {
           <button id="snap" onClick={takeScreenshot}>
             Snap Photo
           </button>
-          <button onClick={clearScreenshot}>Clear</button>
+          {imgData && <button onClick={clearScreenshot}>Clear</button>}
+          <br></br>
           <canvas id="canvas" ref={canvasRef} width="640" height="480"></canvas>
         </>
       )}
