@@ -6,7 +6,7 @@ import React, { useRef, useEffect } from "react";
 export default function Snapshot() {
   const videoRef = useRef(null);
   const canvasRef = useRef(null);
-  var isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
     navigator.userAgent
   );
 
@@ -18,17 +18,15 @@ export default function Snapshot() {
       navigator.mediaDevices &&
       navigator.mediaDevices.getUserMedia
     ) {
-      // Not adding `{ audio: true }` since we only want video now
       navigator.mediaDevices
         .getUserMedia({ video: true })
         .then(function (stream) {
-          //video.src = window.URL.createObjectURL(stream);
           const video = videoRef.current;
           video.srcObject = stream;
           video.play();
         });
     }
-  }, [videoRef]);
+  }, [videoRef, isMobile]);
 
   const takeScreenshot = () => {
     const canvas = canvasRef.current;
@@ -53,8 +51,8 @@ export default function Snapshot() {
       var file = e.target.files[0];
       var reader = new FileReader();
       reader.onloadend = () => {
-        // log to console
-        console.log(reader.result); // logs data:image/jpeg;base64,wL2dvYWwgbW9yZ...
+        // base64 string
+        console.log(reader.result);
       };
       reader.readAsDataURL(file);
     }
